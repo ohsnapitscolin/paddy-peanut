@@ -1,8 +1,11 @@
 $paddy-yellow: rgb(252, 234, 168);
 $paddy-deep-yellow: rgb(249, 219, 139);
+$paddy-brown: rgb(64, 34, 9);
+$paddy-tan: rgb(252, 241, 225);
 
 body {
   margin: 0;
+  color: $paddy-brown;
   background-color: $paddy-yellow;
 }
 
@@ -17,11 +20,25 @@ p {
   margin: 0;
 }
 
+a {
+  color: $paddy-brown;
+
+  &:hover {
+    opacity: 0.56;
+  }
+}
+
 button {
   appearance: none;
   background: none;
   border: none;
+  outline: none;
 
   padding: 0;
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.56;
+    cursor: initial;
+  }
 }

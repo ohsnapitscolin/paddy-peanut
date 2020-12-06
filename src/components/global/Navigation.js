@@ -3,17 +3,16 @@ import styled from "styled-components";
 import { graphql, StaticQuery } from "gatsby";
 import Link from "gatsby-link";
 
-import { Color } from "../utils/style";
+import { Color } from "../../utils/style";
+import { Container, Row, Column } from "../../layout/bootstrap";
 
-import { Container, Row, Column } from "../layout/bootstrap";
-
-const TopNavPadding = styled.div`
+const NavigationPadding = styled.div`
   height: 64px;
   position: relative;
   width: 100%;
 `;
 
-const TopNav = styled.nav`
+const NavigationElement = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
@@ -40,6 +39,7 @@ const LinkList = styled.ul`
 
 const PimaryLink = styled.li`
   margin-right: 16px;
+  font-weight: 500;
 `;
 
 const NavLink = styled.li`
@@ -57,8 +57,8 @@ export class Navigation extends React.Component {
 
     return (
       <>
-        <TopNavPadding />
-        <TopNav>
+        <NavigationPadding />
+        <NavigationElement>
           <Container>
             <Row>
               <Column className="col-12" direction="row">
@@ -66,9 +66,9 @@ export class Navigation extends React.Component {
                   <PimaryLink>
                     <Link to="/">{title}</Link>
                   </PimaryLink>
-                  {links.map(link => {
+                  {links.map((link, i) => {
                     return (
-                      <NavLink>
+                      <NavLink key={i}>
                         <Link to={link.url}>{link.title}</Link>
                       </NavLink>
                     );
@@ -77,7 +77,7 @@ export class Navigation extends React.Component {
               </Column>
             </Row>
           </Container>
-        </TopNav>
+        </NavigationElement>
       </>
     );
   }

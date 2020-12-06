@@ -2,7 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 
+import Button from "../components/global/Button";
+
 import { Container, Row, Column } from "../layout/bootstrap";
+
+const Intro = styled.span`
+  font-family: cursive;
+  font-size: 24px;
+`;
 
 const Title = styled.h1`
   z-index: 2;
@@ -27,10 +34,12 @@ export default class IndexPage extends React.Component {
       <Container>
         <Row>
           <Column className="col-12" center={true}>
+            <Intro>Introducing...</Intro>
             <Title>Paddy Peanut</Title>
             <ImageWrapper>
               <Img fluid={heroImage.fluid} />
             </ImageWrapper>
+            <Button>Get The Book</Button>
           </Column>
         </Row>
       </Container>

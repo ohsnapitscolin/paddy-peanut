@@ -4,8 +4,8 @@ import styled from "styled-components";
 import "../styles/index.scss";
 
 // Components
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
+import Navigation from "../components/global/Navigation";
+import Footer from "../components/global/Footer";
 
 const Main = styled.div`
   min-height: calc(100vh - (64px + 128px));
