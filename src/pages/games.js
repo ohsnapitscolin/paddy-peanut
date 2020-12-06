@@ -1,10 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 
 import { Container, Row, Column } from "../layout/bootstrap";
 
-import { Application, Loader } from "pixi.js";
-import Sprite from "../games/sprite";
 import RockImage from "../images/games/rock.png";
 import FrogImage from "../images/games/frog.png";
 
@@ -35,7 +32,9 @@ export default class GamesPage extends React.Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    const { Application, Loader } = await import("pixi.js");
+
     // The application will create a renderer using WebGL, if possible,
     // with a fallback to a canvas render. It will also setup the ticker
     // and the root stage PIXI.Container.
@@ -51,7 +50,7 @@ export default class GamesPage extends React.Component {
     // can then insert into the DOM.
     this.pixiRef.current.appendChild(this.app.view);
 
-    // // load the texture we need
+    // Load the textures we need.
     this.loader.add("rock", RockImage);
     this.loader.add("frog", FrogImage);
 
@@ -63,7 +62,9 @@ export default class GamesPage extends React.Component {
     this.loader.load(this.setup.bind(this));
   }
 
-  setup() {
+  async setup() {
+    const { default: Sprite } = await import("../games/sprite");
+
     const { rock, frog } = this.loader.resources;
 
     this.rocks = this.rocks.concat([

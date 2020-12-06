@@ -1,12 +1,8 @@
-import { Sprite as PixiSprite, Text as PixiText } from "pixi.js";
+import { Sprite as PixiSprite } from "pixi.js";
 
 export default class Sprite {
-  constructor(texture, options = {}, text) {
-    if (text) {
-      this.sprite = new PixiText(text);
-    } else {
-      this.sprite = new PixiSprite(texture);
-    }
+  constructor(texture, options = {}) {
+    this.sprite = new PixiSprite(texture);
 
     const { x = 0, y = 0, width, height, interactive = false } = options;
 
