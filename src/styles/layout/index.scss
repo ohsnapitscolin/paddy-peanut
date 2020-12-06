@@ -1,0 +1,27 @@
+$paddy-yellow: rgb(252, 234, 168);
+$paddy-deep-yellow: rgb(249, 219, 139);
+
+body {
+  margin: 0;
+  background-color: $paddy-yellow;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  appearance: none;
+  background: none;
+  border: none;
+
+  padding: 0;
+  cursor: pointer;
+}

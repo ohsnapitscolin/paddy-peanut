@@ -1,0 +1,5 @@
+@import "node_modules/bootstrap/scss/_functions";
+@import "node_modules/bootstrap/scss/_variables";
+// Override Bootstrap defaults
+@import "./custom";
+@import "node_modules/bootstrap/scss/bootstrap";
