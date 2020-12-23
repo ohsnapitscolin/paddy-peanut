@@ -4,7 +4,6 @@ import styled from "styled-components";
 import "../styles/index.scss";
 
 // Components
-import SEO from "../components/global/Seo";
 import Navigation from "../components/global/Navigation";
 import Footer from "../components/global/Footer";
 
@@ -18,7 +17,6 @@ export default class Layout extends React.Component {
   render() {
     return (
       <>
-        <SEO />
         <Navigation />
         <Main>{this.props.children}</Main>
         <Footer />

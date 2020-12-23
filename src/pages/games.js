@@ -6,6 +6,7 @@ import { Container, Row, Column } from "../layout/bootstrap";
 import RockImage from "../images/games/rock.png";
 import FrogImage from "../images/games/frog.png";
 
+import SEO from "../components/global/Seo";
 import Button from "../components/global/Button";
 
 const GameContainer = styled.div`
@@ -15,7 +16,6 @@ const GameContainer = styled.div`
 
 const Title = styled.h1`
   text-align: center;
-
   font-size: 54px;
   margin-bottom: 8px;
 `;
@@ -239,20 +239,23 @@ export default class GamesPage extends React.Component {
   render() {
     const { inProgress, gameText, streak } = this.state;
     return (
-      <Container>
-        <Row>
-          <Column className="col-12" center={true}>
-            <Title>Find Freddie Frog</Title>
-            <Messaging>
-              Streak: {streak} {gameText && ` - ${gameText}`}
-            </Messaging>
-            <GameContainer ref={this.pixiRef} />
-            <Button disabled={inProgress} onClick={this.start.bind(this)}>
-              Play
-            </Button>
-          </Column>
-        </Row>
-      </Container>
+      <>
+        <SEO title="Games" />
+        <Container>
+          <Row>
+            <Column className="col-12" center={true}>
+              <Title>Find Freddie Frog</Title>
+              <Messaging>
+                Streak: {streak} {gameText && ` - ${gameText}`}
+              </Messaging>
+              <GameContainer ref={this.pixiRef} />
+              <Button disabled={inProgress} onClick={this.start.bind(this)}>
+                Play
+              </Button>
+            </Column>
+          </Row>
+        </Container>
+      </>
     );
   }
 }

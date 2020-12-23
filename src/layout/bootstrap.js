@@ -1,9 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+const ContainerElement = styled.div.attrs({
+  className: "container",
+})`
+  box-sizing: border-box;
+`;
+
 export class Container extends React.Component {
   render() {
-    return <div className="container">{this.props.children}</div>;
+    return <ContainerElement>{this.props.children}</ContainerElement>;
   }
 }
 
