@@ -5,7 +5,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: `Paddy Peanut`,
-    description: `Explore the Great White North with Paddy Peanut and her and Wild Animal Kingdom!`,
+    description: `Explore the Great White North with Paddy Peanut and her wild animal kingdom.`,
     author: `Patricia Fumerton`,
   },
   plugins: [
