@@ -7,7 +7,6 @@ import ContentBlock from "../components/content/Block";
 
 const Title = styled.h1`
   text-align: center;
-  font-family: cursive;
   font-size: 54px;
 `;
 

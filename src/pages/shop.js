@@ -8,7 +8,6 @@ import { responsive } from "../utils/style";
 
 const Title = styled.h1`
   text-align: center;
-  font-family: cursive;
   font-size: 54px;
   margin-bottom: 56px;
 `;

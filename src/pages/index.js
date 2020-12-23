@@ -9,7 +9,6 @@ import ContentBlock from "../components/content/Block";
 import { Container, Row, Column } from "../layout/bootstrap";
 
 const Intro = styled.span`
-  font-family: cursive;
   font-size: 24px;
 `;
 
@@ -18,7 +17,6 @@ const Title = styled.h1`
   width: 100%;
   text-align: center;
 
-  font-family: cursive;
   font-size: 100px;
 `;
 

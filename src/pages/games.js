@@ -15,7 +15,7 @@ const GameContainer = styled.div`
 
 const Title = styled.h1`
   text-align: center;
-  font-family: cursive;
+
   font-size: 54px;
   margin-bottom: 8px;
 `;
