@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import { Container, Row, Column } from "../layout/bootstrap";
 
@@ -6,6 +7,22 @@ import RockImage from "../images/games/rock.png";
 import FrogImage from "../images/games/frog.png";
 
 import Button from "../components/global/Button";
+
+const GameContainer = styled.div`
+  width: 300px;
+  height: 300px;
+`;
+
+const Title = styled.h1`
+  text-align: center;
+  font-family: cursive;
+  font-size: 54px;
+  margin-bottom: 8px;
+`;
+
+const Messaging = styled.span`
+  font-size: 24px;
+`;
 
 const RockPositions = [
   { x: 25, y: 125 },
@@ -156,7 +173,7 @@ export default class GamesPage extends React.Component {
 
   startShuffle() {
     let loops = 0;
-    let ms = 500;
+    let ms = 450;
     this.frog.hide();
     return this.loopShuffle(loops, ms).then(() => {
       this.endShuffle();
@@ -178,9 +195,9 @@ export default class GamesPage extends React.Component {
 
   loopShuffle(loops, ms) {
     return this.shuffle(ms).then(async () => {
-      if (loops > 30) return;
+      if (loops > 25) return;
       loops++;
-      ms -= 10;
+      ms -= 9;
       await this.delay(50);
       return this.loopShuffle(loops, ms);
     });
@@ -225,11 +242,11 @@ export default class GamesPage extends React.Component {
       <Container>
         <Row>
           <Column className="col-12" center={true}>
-            Games
-            <h4>
+            <Title>Find Freddie Frog</Title>
+            <Messaging>
               Streak: {streak} {gameText && ` - ${gameText}`}
-            </h4>
-            <div ref={this.pixiRef} />
+            </Messaging>
+            <GameContainer ref={this.pixiRef} />
             <Button disabled={inProgress} onClick={this.start.bind(this)}>
               Play
             </Button>

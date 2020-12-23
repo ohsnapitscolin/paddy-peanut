@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { graphql, StaticQuery } from "gatsby";
 import Link from "gatsby-link";
 
-import { Color } from "../../utils/style";
+import { Color, responsive } from "../../utils/style";
 import { Container, Row, Column } from "../../layout/bootstrap";
+
+import branch from "../../images/branch.png";
 
 const NavigationPadding = styled.div`
   height: 64px;
@@ -50,6 +52,49 @@ const NavLink = styled.li`
   }
 `;
 
+const Branches = styled.div`
+  height: 0;
+  display: none;
+
+  ${responsive.sm`
+    display: block;
+  `}
+`;
+
+const LeftBranch = styled.img`
+  position: absolute;
+  top: -15px;
+  left: 75px;
+
+  top: -10px;
+  left: -48px;
+
+  ${responsive.md`
+    left: 32px;
+  `}
+
+  ${responsive.lg`
+    left: 80px;
+  `}
+`;
+
+const RightBranch = styled.img`
+  position: absolute;
+  height: 420px;
+  transform: scaleX(-1);
+
+  top: -10px;
+  right: -12px;
+
+  ${responsive.md`
+    right: 48px;
+  `}
+
+  ${responsive.lg`
+    right: 120px;
+  `}
+`;
+
 export class Navigation extends React.Component {
   render() {
     const navigation = this.props.data.allContentfulNavigation.nodes[0];
@@ -78,6 +123,10 @@ export class Navigation extends React.Component {
             </Row>
           </Container>
         </NavigationElement>
+        <Branches>
+          <LeftBranch src={branch} />
+          <RightBranch src={branch} />
+        </Branches>
       </>
     );
   }
