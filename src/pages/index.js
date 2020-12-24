@@ -70,7 +70,7 @@ export const query = graphql`
       nodes {
         heroImage {
           description
-          fluid(maxWidth: 1200, quality: 100) {
+          fluid(maxWidth: 500, quality: 90) {
             ...GatsbyContentfulFluid_withWebp_noBase64
           }
         }

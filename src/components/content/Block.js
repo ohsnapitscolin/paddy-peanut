@@ -33,6 +33,10 @@ const ImageWrapper = styled.div`
 
   ${responsive.sm`
     margin: 0 24px 0 0;
+    width: 150px;
+  `}
+
+  ${responsive.md`
     width: 250px;
   `}
 
