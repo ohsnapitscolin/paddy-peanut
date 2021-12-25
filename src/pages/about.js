@@ -46,9 +46,7 @@ export const query = graphql`
           title
           image {
             description
-            fluid(maxWidth: 250, quality: 90) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
-            }
+            gatsbyImageData(width: 250, placeholder: NONE)
           }
           body {
             childMarkdownRemark {

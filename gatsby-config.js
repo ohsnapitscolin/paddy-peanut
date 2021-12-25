@@ -9,6 +9,7 @@ module.exports = {
     author: `Patricia Fumerton`,
   },
   plugins: [
+    `gatsby-plugin-image`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -20,6 +21,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-sass`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -34,12 +36,6 @@ module.exports = {
       resolve: `gatsby-plugin-styled-components`,
       options: {
         displayName: false,
-      },
-    },
-    {
-      resolve: "gatsby-plugin-sass",
-      options: {
-        includePaths: [],
       },
     },
     {

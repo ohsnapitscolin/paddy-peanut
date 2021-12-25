@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import Img from "gatsby-image";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { Row, Column } from "../../layout/bootstrap";
 import { Color, responsive } from "../../utils/style";
@@ -64,8 +64,8 @@ export default function Block({ className, content }) {
         <ContentWrapper>
           {image && (
             <ImageWrapper align={align}>
-              <Img
-                fluid={image.fluid}
+              <GatsbyImage
+                image={getImage(image)}
                 style={{ width: "100%" }}
                 imgStyle={{ objectFit: "contain" }}
               />

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { graphql } from "gatsby";
-import Img from "gatsby-image";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { Container, Row, Column } from "../layout/bootstrap";
 
@@ -41,7 +41,7 @@ export default class IndexPage extends React.Component {
               <Intro>Introducing...</Intro>
               <Title>Paddy Peanut</Title>
               <ImageWrapper>
-                <Img fluid={heroImage.fluid} />
+                <GatsbyImage image={getImage(heroImage)} />
               </ImageWrapper>
             </Column>
           </Row>
@@ -70,9 +70,7 @@ export const query = graphql`
       nodes {
         heroImage {
           description
-          fluid(maxWidth: 500, quality: 90) {
-            ...GatsbyContentfulFluid_withWebp_noBase64
-          }
+          gatsbyImageData(width: 500, placeholder: NONE)
         }
         content {
           title
