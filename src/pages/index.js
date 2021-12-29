@@ -5,7 +5,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { Container, Row, Column } from "../layout/bootstrap";
 
-import SEO from "../components/global/Seo";
+import Seo from "../components/global/Seo";
 import Link from "../components/global/Link";
 import ContentBlock from "../components/content/Block";
 
@@ -34,7 +34,7 @@ export default class IndexPage extends React.Component {
     const { heroImage, content } = data;
     return (
       <>
-        <SEO title="Home" />
+        <Seo title="Home" />
         <Container>
           <Row>
             <Column className="col-12 mb-4" center={true}>

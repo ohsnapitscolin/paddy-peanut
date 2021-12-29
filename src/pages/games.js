@@ -1,10 +1,32 @@
-import { useEffect } from "react";
-import { navigate } from "gatsby";
+import React from "react";
+import styled from "styled-components";
+
+import Seo from "../components/global/Seo";
+import Hide from "../components/games/hide";
+import Jump from "../components/games/jump";
+import Snake from "../components/games/snake";
+
+const GameContainer = styled.div`
+  margin-bottom: 124px;
+`;
 
 export default function GamesPage() {
-  useEffect(() => {
-    navigate("/games/frog");
-  }, []);
+  const Games = [Hide, Jump, Snake];
 
-  return null;
+  return (
+    <>
+      <Seo title="Games" />
+      <div className="d-flex flex-column align-items-center mt-5">
+        {Games.map((Game, i) => {
+          return (
+            <>
+              <GameContainer key={i}>
+                <Game />
+              </GameContainer>
+            </>
+          );
+        })}
+      </div>
+    </>
+  );
 }

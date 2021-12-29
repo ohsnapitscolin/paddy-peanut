@@ -22,7 +22,7 @@ export default class Footer extends React.Component {
         <Container>
           <Row>
             <Column className="col-12">
-              <p>Copyright 2020, Patricia Fumerton</p>
+              <p>Copyright 2021, Patricia Fumerton</p>
               <p>All rights reserved</p>
             </Column>
           </Row>

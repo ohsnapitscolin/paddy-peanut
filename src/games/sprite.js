@@ -50,6 +50,11 @@ export default class Sprite {
     return { x: this.sprite.x, y: this.sprite.y };
   }
 
+  getBounds() {
+    const { x, y, width, height } = this.sprite;
+    return { x, y, width, height };
+  }
+
   draw() {
     // Check if the sprite has reached the targeted X position.
     if (
