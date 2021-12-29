@@ -66,6 +66,7 @@ export default function Block({ className, content }) {
             <ImageWrapper align={align}>
               <GatsbyImage
                 image={getImage(image)}
+                alt=""
                 style={{ width: "100%" }}
                 imgStyle={{ objectFit: "contain" }}
               />

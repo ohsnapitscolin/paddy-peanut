@@ -41,7 +41,7 @@ export default class IndexPage extends React.Component {
               <Intro>Introducing...</Intro>
               <Title>Paddy Peanut</Title>
               <ImageWrapper>
-                <GatsbyImage image={getImage(heroImage)} />
+                <GatsbyImage image={getImage(heroImage)} alt="" />
               </ImageWrapper>
             </Column>
           </Row>
