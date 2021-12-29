@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import Seo from "../components/global/Seo";
 import Hide from "../components/games/hide";
 import Jump from "../components/games/jump";
 import Snake from "../components/games/snake";
@@ -13,16 +14,19 @@ export default function GamesPage() {
   const Games = [Hide, Jump, Snake];
 
   return (
-    <div className="d-flex flex-column align-items-center mt-5">
-      {Games.map((Game, i) => {
-        return (
-          <>
-            <GameContainer key={i}>
-              <Game />
-            </GameContainer>
-          </>
-        );
-      })}
-    </div>
+    <>
+      <Seo title="Games" />
+      <div className="d-flex flex-column align-items-center mt-5">
+        {Games.map((Game, i) => {
+          return (
+            <>
+              <GameContainer key={i}>
+                <Game />
+              </GameContainer>
+            </>
+          );
+        })}
+      </div>
+    </>
   );
 }
