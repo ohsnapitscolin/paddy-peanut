@@ -1,28 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-
-import { Container, Row, Column } from "../../layout/bootstrap";
+import { Graphics } from "pixi.js";
 
 import RockImage from "../../images/games/rock.png";
 import FrogImage from "../../images/games/frog.png";
 
-import SEO from "../../components/global/Seo";
-import Button from "../../components/global/Button";
-
-const GameContainer = styled.div`
-  width: 300px;
-  height: 300px;
-`;
-
-const Title = styled.h1`
-  text-align: center;
-  font-size: 54px;
-  margin-bottom: 8px;
-`;
-
-const Messaging = styled.span`
-  font-size: 24px;
-`;
+import Sprite from "../sprite";
 
 const RockPositions = [
   { x: 25, y: 125 },
@@ -30,42 +11,18 @@ const RockPositions = [
   { x: 225, y: 125 },
 ];
 
-export default class FrogPage extends React.Component {
-  constructor() {
-    super();
-
-    this.pixiRef = React.createRef();
-
-    this.app = null;
-    this.loader = null;
+export default class Find {
+  initialize(app, loader, updateFn) {
+    this.graphics = new Graphics();
 
     this.rocks = [];
     this.frog = [];
 
-    this.state = {
-      inProgress: false,
-      gameText: "",
-      streak: 0,
-    };
-  }
+    this.app = app;
+    this.loader = loader;
+    this.updateFn = updateFn;
 
-  async componentDidMount() {
-    const { Application, Loader } = await import("pixi.js");
-
-    // The application will create a renderer using WebGL, if possible,
-    // with a fallback to a canvas render. It will also setup the ticker
-    // and the root stage PIXI.Container.
-    this.app = new Application({
-      width: 300,
-      height: 300,
-      transparent: true,
-    });
-
-    this.loader = new Loader();
-
-    // The application will create a canvas element for you that you
-    // can then insert into the DOM.
-    this.pixiRef.current.appendChild(this.app.view);
+    this.streak = 0;
 
     // Load the textures we need.
     this.loader.add("rock", RockImage);
@@ -79,9 +36,7 @@ export default class FrogPage extends React.Component {
     this.loader.load(this.setup.bind(this));
   }
 
-  async setup() {
-    const { default: Sprite } = await import("../../games/sprite");
-
+  setup() {
     const { rock, frog } = this.loader.resources;
 
     this.rocks = this.rocks.concat([
@@ -137,10 +92,11 @@ export default class FrogPage extends React.Component {
   }
 
   start() {
-    this.setState({
+    this.update({
       inProgress: true,
       gameText: "",
     });
+
     Promise.all(
       this.rocks.map((rock, i) => {
         const position = RockPositions[i];
@@ -157,15 +113,17 @@ export default class FrogPage extends React.Component {
 
   end(win) {
     if (win) {
-      this.setState({
+      this.streak++;
+
+      this.update({
         inProgress: false,
-        streak: this.state.streak + 1,
         gameText: "Winner!",
       });
     } else {
-      this.setState({
+      this.streak = 0;
+
+      this.update({
         inProgress: false,
-        streak: 0,
         gameText: "Try Again!",
       });
     }
@@ -236,26 +194,11 @@ export default class FrogPage extends React.Component {
     return number;
   }
 
-  render() {
-    const { inProgress, gameText, streak } = this.state;
-    return (
-      <>
-        <SEO title="Games" />
-        <Container>
-          <Row>
-            <Column className="col-12" center={true}>
-              <Title>Find Freddie Frog</Title>
-              <Messaging>
-                Streak: {streak} {gameText && ` - ${gameText}`}
-              </Messaging>
-              <GameContainer ref={this.pixiRef} />
-              <Button disabled={inProgress} onClick={this.start.bind(this)}>
-                Play
-              </Button>
-            </Column>
-          </Row>
-        </Container>
-      </>
-    );
+  update({ gameText, inProgress }) {
+    this.updateFn({
+      streak: this.streak,
+      gameText,
+      inProgress,
+    });
   }
 }
