@@ -1,30 +1,14 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 
+// Components
 import { Container, Row, Column } from "../../layout/bootstrap";
-
-import Seo from "../../components/global/Seo";
-import Button from "../../components/global/Button";
+import Game from "./game";
+import Button from "../global/Button";
 
 // Pixi and Games
 import usePixi from "../../hooks/pixi";
-import Find from "../../games/find/main";
+import Find from "../../games/hide/main";
 import { GameState } from "../../games/contants";
-
-const GameContainer = styled.div`
-  width: 300px;
-  height: 300px;
-`;
-
-const Title = styled.h1`
-  text-align: center;
-  font-size: 54px;
-  margin-bottom: 8px;
-`;
-
-const Messaging = styled.span`
-  font-size: 24px;
-`;
 
 export default function FrogGame() {
   const [game] = useState(new Find());
@@ -54,15 +38,15 @@ export default function FrogGame() {
 
   return (
     <>
-      <Seo title="Find Freddie Frog" />
       <Container>
         <Row>
           <Column className="col-12" center={true}>
-            <Title>Find Freddie Frog</Title>
-            <Messaging>
-              Streak: {streak} {gameText && ` - ${gameText}`}
-            </Messaging>
-            <GameContainer ref={pixiRef} />
+            <Game
+              title="Hide & Seek With Tommy"
+              message={`Streak: ${streak} ${gameText && ` - ${gameText}`}`}
+              pixiRef={pixiRef}
+            />
+
             <Button disabled={gameState === GameState.Active} onClick={start}>
               Play
             </Button>

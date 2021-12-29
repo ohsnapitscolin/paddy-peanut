@@ -16,7 +16,7 @@ const RockPositions = [
   { x: 225, y: 125 },
 ];
 
-export default class Find extends Game {
+export default class Hide extends Game {
   initialize(app, loader) {
     this.graphics = new Graphics();
 
