@@ -1,27 +1,27 @@
 import { Graphics } from "pixi.js";
 
+import Game from "../game";
+import Jumper from "./jumper";
+import Line from "../line";
+import Obstacle from "./obstacle";
+
+// Constants
+import { GameState } from "../contants";
+
+// Assets
 import RockImage from "../../images/games/rock.png";
 import FrogImage from "../../images/games/frog.png";
 
-import Jumper from "./jumper";
-import Obstacle from "./obstacle";
-import Line from "../line";
+const StartingSpeed = 2;
 
-const State = {
-  Active: 0,
-  Over: 1,
-};
-
-export default class Jump {
-  initialize(app, loader, updateFn) {
+export default class Jump extends Game {
+  initialize(app, loader) {
     this.graphics = new Graphics();
-    this.obstacles = [];
 
     this.app = app;
     this.loader = loader;
-    this.updateFn = updateFn;
 
-    this.state = State.Over;
+    this.state = GameState.Over;
 
     this.loader.add("rock", RockImage);
     this.loader.add("frog", FrogImage);
@@ -49,18 +49,25 @@ export default class Jump {
   }
 
   start() {
-    this.state = State.Active;
+    this.state = GameState.Active;
     this.maybeAddObstacle();
+
+    this.updateState({
+      gameState: this.state,
+    });
   }
 
   reset() {
-    this.obstacles.forEach(o => this.app.stage.removeChild(o.getSprite()));
+    if (this.obstacles) {
+      this.obstacles.forEach(o => this.app.stage.removeChild(o.getSprite()));
+    }
+
     this.obstacles = [];
 
     this.jumper.reset();
 
     this.ticks = 0;
-    this.speed = 2;
+    this.speed = StartingSpeed;
 
     this.draw();
   }
@@ -70,7 +77,7 @@ export default class Jump {
   }
 
   tick() {
-    if (this.state === State.Over) return;
+    if (this.state === GameState.Over) return;
 
     this.ticks++;
 
@@ -84,7 +91,14 @@ export default class Jump {
     this.checkCollisions();
     this.checkBounds();
 
-    this.updateFn({ score: Math.floor(this.ticks / 10) });
+    const newScore = Math.floor(this.ticks / 10);
+
+    if (this.score !== newScore) {
+      this.score = newScore;
+      this.updateState({
+        score: this.score,
+      });
+    }
   }
 
   draw() {
@@ -135,14 +149,14 @@ export default class Jump {
     });
 
     if (collision) {
-      this.state = State.Over;
-      this.updateFn({
-        state: State.Over,
+      this.state = GameState.Over;
+      this.updateState({
+        gameState: GameState.Over,
       });
     }
   }
 
   updateSpeed() {
-    this.speed = 2 + this.ticks / 1000;
+    this.speed = StartingSpeed + this.ticks / 1000;
   }
 }

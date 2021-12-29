@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 
 import { Container, Row, Column } from "../layout/bootstrap";
 
-import SEO from "../components/global/Seo";
+import Seo from "../components/global/Seo";
 import ContentBlock from "../components/content/Block";
 
 const Title = styled.h1`
@@ -18,7 +18,7 @@ export default class AboutPage extends React.Component {
     const { content } = data;
     return (
       <>
-        <SEO title="About" />
+        <Seo title="About" />
         <Container>
           <Row>
             <Column className="col-12 mb-4" center={true}>

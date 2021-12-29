@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Container, Row, Column } from "../layout/bootstrap";
-import SEO from "../components/global/Seo";
+import Seo from "../components/global/Seo";
 
 import turtle from "../images/turtle.png";
 import { responsive } from "../utils/style";
@@ -24,7 +24,7 @@ const Turtle = styled.img`
 export default function () {
   return (
     <>
-      <SEO title="Shop" />
+      <Seo title="Shop" />
       <Container>
         <Row>
           <Column className="col-12" center={true}>

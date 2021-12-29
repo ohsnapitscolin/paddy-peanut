@@ -1,40 +1,25 @@
 import { Graphics } from "pixi.js";
 
-const Type = {
-  None: 0,
-  Snake: 1,
-  Food: 2,
-};
+import Game from "../game";
 
-const Direction = {
-  None: -1,
-  Up: 0,
-  Down: 1,
-  Left: 2,
-  Right: 3,
-};
+// Constants
+import { Direction, GameState } from "../contants";
 
-const State = {
-  Active: 0,
-  Over: 1,
-};
+const SnakeFill = 0x228b22;
 
-export default class Snake {
-  initialize(app, loader, updateFn) {
+export default class Snake extends Game {
+  initialize(app, loader) {
     this.graphics = new Graphics();
 
     this.app = app;
     this.loader = loader;
-    this.updateFn = updateFn;
 
     this.setup();
   }
 
   setup() {
-    this.app.stage.addChild(this.graphics);
-
     this.reset();
-
+    this.app.stage.addChild(this.graphics);
     this.app.ticker.add(this.tick.bind(this));
   }
 
@@ -42,7 +27,7 @@ export default class Snake {
     this.score = 0;
     this.ticks = 0;
     this.direction = Direction.None;
-    this.state = State.Active;
+    this.gameState = GameState.Active;
 
     this.snake = [];
     this.food = [];
@@ -53,7 +38,10 @@ export default class Snake {
     [x, y] = this.randomSpace();
     this.food.push([x, y]);
 
-    this.update();
+    this.updateState({
+      score: this.score,
+      gameState: this.gameState,
+    });
 
     this.draw();
   }
@@ -65,11 +53,11 @@ export default class Snake {
     if (this.direction === Direction.Right && dir === Direction.Left) return;
 
     this.direction = dir;
-    this.update();
   }
 
   tick() {
-    if (this.direction === Direction.None || this.state === State.Over) return;
+    if (this.direction === Direction.None || this.gameState === GameState.Over)
+      return;
 
     this.ticks++;
 
@@ -102,8 +90,10 @@ export default class Snake {
     }
 
     if (collision) {
-      this.state = State.Over;
-      this.update();
+      this.gameState = GameState.Over;
+      this.updateState({
+        gameState: this.gameState,
+      });
       return;
     }
 
@@ -115,7 +105,9 @@ export default class Snake {
       this.snake.pop();
     } else {
       this.score++;
-      this.update();
+      this.updateState({
+        score: this.score,
+      });
       this.food[0] = this.randomSpace();
     }
 
@@ -126,12 +118,12 @@ export default class Snake {
     this.graphics.clear();
 
     this.snake.forEach(([x, y]) => {
-      this.graphics.beginFill(0x000000);
+      this.graphics.beginFill(SnakeFill);
       this.graphics.drawRect(x * 10, y * 10, 10, 10);
     });
 
     this.food.forEach(([x, y]) => {
-      this.graphics.beginFill(0xff0000);
+      this.graphics.beginFill("red");
       this.graphics.drawRect(x * 10, y * 10, 10, 10);
     });
   }
@@ -145,13 +137,5 @@ export default class Snake {
     }
 
     return [x, y];
-  }
-
-  update() {
-    this.updateFn({
-      score: this.score,
-      direction: this.direction,
-      state: this.state,
-    });
   }
 }

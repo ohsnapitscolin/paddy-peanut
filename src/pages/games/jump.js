@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 // Components
 import { Container, Row, Column } from "../../layout/bootstrap";
-import SEO from "../../components/global/Seo";
+import Seo from "../../components/global/Seo";
 import Button from "../../components/global/Button";
 
+// Pixi and Games
 import usePixi from "../../hooks/pixi";
 import Jump from "../../games/jump/main";
+import { GameState } from "../../games/contants";
 
 const GameContainer = styled.div`
   width: 300px;
@@ -25,51 +27,49 @@ const Messaging = styled.span`
 `;
 
 export default function JumpGame() {
-  const [jump] = useState(new Jump());
+  const [game] = useState(new Jump());
 
-  const [newGame, setNewGame] = useState(true);
-  const [score, setScore] = useState(0);
-
-  const { pixiRef, app, loader } = usePixi();
-
-  useEffect(() => {
-    if (!app || !loader) return;
-    jump.initialize(app, loader, update);
-  }, [app, loader, jump]);
-
-  function action() {
-    jump.jump();
-  }
+  const { pixiRef, state } = usePixi(game, {
+    score: 0,
+    gameState: GameState.Inactive,
+  });
 
   function start() {
-    setNewGame(false);
-    jump.reset();
-    jump.start();
+    game.reset();
+    game.start();
   }
 
-  function update({ score, state }) {
-    if (score) {
-      setScore(score);
-    }
+  function jump() {
+    game.jump();
+  }
 
-    if (state === 1) {
-      setNewGame(true);
+  function getGameText() {
+    switch (state.gameState) {
+      case GameState.Over:
+        return "Try Again";
+      default:
+        return "";
     }
   }
+
+  const { score, gameState } = state;
+  const gameText = getGameText();
 
   return (
     <>
-      <SEO title="Jumping With Freddie" />
+      <Seo title="Jumping With Freddie" />
       <Container>
         <Row>
           <Column className="col-12" center={true}>
-            <Title>Watch Freddie Jump</Title>
-            <Messaging>Score: {score}</Messaging>
+            <Title>Jumping With Freddie</Title>
+            <Messaging>
+              Score: {score} {gameText && ` - ${gameText}`}
+            </Messaging>
             <GameContainer ref={pixiRef} />
-            {newGame ? (
+            {gameState !== GameState.Active ? (
               <Button onClick={start}>Play</Button>
             ) : (
-              <Button onClick={action}>Jump</Button>
+              <Button onClick={jump}>Jump</Button>
             )}
           </Column>
         </Row>

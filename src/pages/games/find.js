@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { Container, Row, Column } from "../../layout/bootstrap";
 
-import SEO from "../../components/global/Seo";
+import Seo from "../../components/global/Seo";
 import Button from "../../components/global/Button";
 
+// Pixi and Games
 import usePixi from "../../hooks/pixi";
 import Find from "../../games/find/main";
+import { GameState } from "../../games/contants";
 
 const GameContainer = styled.div`
   width: 300px;
@@ -25,32 +27,34 @@ const Messaging = styled.span`
 `;
 
 export default function FrogGame() {
-  const [find] = useState(new Find());
+  const [game] = useState(new Find());
 
-  const [streak, setStreak] = useState(0);
-  const [gameText, setGameText] = useState("");
-  const [inProgress, setInProgress] = useState(false);
-
-  const { pixiRef, app, loader } = usePixi();
-
-  useEffect(() => {
-    if (!app || !loader) return;
-    find.initialize(app, loader, update);
-  }, [app, loader, find]);
+  const { pixiRef, state } = usePixi(game, {
+    streak: 0,
+    gameState: GameState.Inactive,
+  });
 
   function start() {
-    find.start();
+    game.start();
   }
 
-  function update({ streak, gameText, inProgress }) {
-    setStreak(streak);
-    setGameText(gameText);
-    setInProgress(inProgress);
+  function getGameText() {
+    switch (state.gameState) {
+      case GameState.Win:
+        return "Winner!";
+      case GameState.Over:
+        return "Try Again";
+      default:
+        return "";
+    }
   }
+
+  const { streak, gameState } = state;
+  const gameText = getGameText();
 
   return (
     <>
-      <SEO title="Find Freddie Frog" />
+      <Seo title="Find Freddie Frog" />
       <Container>
         <Row>
           <Column className="col-12" center={true}>
@@ -59,7 +63,7 @@ export default function FrogGame() {
               Streak: {streak} {gameText && ` - ${gameText}`}
             </Messaging>
             <GameContainer ref={pixiRef} />
-            <Button disabled={inProgress} onClick={start}>
+            <Button disabled={gameState === GameState.Active} onClick={start}>
               Play
             </Button>
           </Column>

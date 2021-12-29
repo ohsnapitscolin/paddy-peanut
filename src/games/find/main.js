@@ -1,9 +1,14 @@
 import { Graphics } from "pixi.js";
 
+import Game from "../game";
+import Sprite from "../sprite";
+
+// Assets
 import RockImage from "../../images/games/rock.png";
 import FrogImage from "../../images/games/frog.png";
 
-import Sprite from "../sprite";
+// Constants
+import { GameState } from "../contants";
 
 const RockPositions = [
   { x: 25, y: 125 },
@@ -11,18 +16,12 @@ const RockPositions = [
   { x: 225, y: 125 },
 ];
 
-export default class Find {
-  initialize(app, loader, updateFn) {
+export default class Find extends Game {
+  initialize(app, loader) {
     this.graphics = new Graphics();
-
-    this.rocks = [];
-    this.frog = [];
 
     this.app = app;
     this.loader = loader;
-    this.updateFn = updateFn;
-
-    this.streak = 0;
 
     // Load the textures we need.
     this.loader.add("rock", RockImage);
@@ -37,6 +36,10 @@ export default class Find {
   }
 
   setup() {
+    this.streak = 0;
+    this.rocks = [];
+    this.frog = [];
+
     const { rock, frog } = this.loader.resources;
 
     this.rocks = this.rocks.concat([
@@ -92,9 +95,8 @@ export default class Find {
   }
 
   start() {
-    this.update({
-      inProgress: true,
-      gameText: "",
+    this.updateState({
+      gameState: GameState.Active,
     });
 
     Promise.all(
@@ -115,16 +117,14 @@ export default class Find {
     if (win) {
       this.streak++;
 
-      this.update({
-        inProgress: false,
-        gameText: "Winner!",
+      this.updateState({
+        streak: this.streak,
+        gameState: GameState.Win,
       });
     } else {
-      this.streak = 0;
-
-      this.update({
-        inProgress: false,
-        gameText: "Try Again!",
+      this.updateState({
+        streak: this.streak,
+        gameState: GameState.Over,
       });
     }
   }
@@ -192,13 +192,5 @@ export default class Find {
       return this._getRandomNumber(min, max, taken);
     }
     return number;
-  }
-
-  update({ gameText, inProgress }) {
-    this.updateFn({
-      streak: this.streak,
-      gameText,
-      inProgress,
-    });
   }
 }

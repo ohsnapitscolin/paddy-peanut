@@ -1,9 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-export default function usePixi() {
+export default function usePixi(game, initialState) {
   const pixiRef = useRef(null);
+
   const [app, setApp] = useState(null);
   const [loader, setLoader] = useState(null);
+  const [state, setState] = useState(initialState);
 
   useEffect(() => {
     async function initialize() {
@@ -27,5 +29,21 @@ export default function usePixi() {
     initialize();
   }, [pixiRef]);
 
-  return { pixiRef, app, loader };
+  const updateState = useCallback(
+    newState => {
+      setState({ ...state, ...newState });
+    },
+    [state, setState]
+  );
+
+  useEffect(() => {
+    if (!app || !loader) return;
+    game.initialize(app, loader);
+  }, [game, app, loader]);
+
+  useEffect(() => {
+    game.setUpdateState(updateState);
+  }, [game, updateState]);
+
+  return { pixiRef, state };
 }
