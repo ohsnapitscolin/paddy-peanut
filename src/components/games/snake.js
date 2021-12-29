@@ -13,8 +13,8 @@ import { GameState } from "../../games/contants";
 
 const ArrowButton = styled(Button)`
   padding: 5px;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   flex-grow: 0;
 
   margin: 2px;
@@ -23,7 +23,8 @@ const ArrowButton = styled(Button)`
   align-items: center;
   justify-content: center;
 
-  font-size: 24px;
+  font-size: 32px;
+  line-height: 32px;
 
   &:hover {
     opacity: 0.56;
@@ -115,13 +116,13 @@ export default function FrogGame() {
             />
 
             <div className="d-flex flex-column align-items-center mb-4">
-              <ArrowButton onClick={up}>⬆</ArrowButton>
+              <ArrowButton onClick={up}>⇧</ArrowButton>
               <div className="d-flex flex-row justify-content-center">
-                <ArrowButton onClick={left}>⬅</ArrowButton>
+                <ArrowButton onClick={left}>⇦</ArrowButton>
                 <Center />
-                <ArrowButton onClick={right}>⮕</ArrowButton>
+                <ArrowButton onClick={right}>⇨</ArrowButton>
               </div>
-              <ArrowButton onClick={down}>⬇</ArrowButton>
+              <ArrowButton onClick={down}>⇩</ArrowButton>
             </div>
 
             <Button disabled={gameState !== GameState.Over} onClick={reset}>

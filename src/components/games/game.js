@@ -6,7 +6,11 @@ import { Color } from "../../utils/style";
 const GameContainer = styled.div`
   width: 300px;
   height: 300px;
-  border: 2px solid ${Color.paddyBrown};
+
+  canvas {
+    touch-action: auto;
+    border: 2px solid ${Color.paddyBrown};
+  }
 `;
 
 const Title = styled.h1`

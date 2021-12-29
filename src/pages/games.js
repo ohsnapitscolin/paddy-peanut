@@ -5,6 +5,10 @@ import Seo from "../components/global/Seo";
 
 const GameContainer = styled.div`
   margin-bottom: 124px;
+
+  &:last-of-type {
+    margin-bottom: 56px;
+  }
 `;
 
 export default function GamesPage() {
