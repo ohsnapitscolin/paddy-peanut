@@ -8,7 +8,7 @@ const GameContainer = styled.div`
   height: 300px;
 
   canvas {
-    touch-action: auto;
+    touch-action: auto !important;
     border: 2px solid ${Color.paddyBrown};
   }
 `;

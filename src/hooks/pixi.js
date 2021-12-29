@@ -19,6 +19,8 @@ export default function usePixi(game, initialState) {
         transparent: true,
       });
 
+      app.renderer.plugins.interaction.autoPreventDefault = false;
+
       // The application will create a canvas element for you that you
       // can then insert into the DOM.
       pixiRef.current.appendChild(app.view);
