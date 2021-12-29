@@ -52,19 +52,21 @@ export default function FrogGame() {
   }, []);
 
   function keydown(e) {
-    e.preventDefault();
-
     switch (e.key) {
       case "ArrowUp":
+        e.preventDefault();
         up();
         break;
       case "ArrowDown":
+        e.preventDefault();
         down();
         break;
       case "ArrowLeft":
+        e.preventDefault();
         left();
         break;
       case "ArrowRight":
+        e.preventDefault();
         right();
         break;
       default:
