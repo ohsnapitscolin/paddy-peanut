@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 
 // Components
-import { Container, Row, Column } from "../../layout/bootstrap";
 import Game from "./game";
-import Button from "../global/Button";
 
 // Pixi and Games
 import usePixi from "../../hooks/pixi";
@@ -38,21 +36,13 @@ export default function FrogGame() {
 
   return (
     <>
-      <Container>
-        <Row>
-          <Column className="col-12" center={true}>
-            <Game
-              title="Hide & Seek With Tommy"
-              message={`Streak: ${streak} ${gameText && ` - ${gameText}`}`}
-              pixiRef={pixiRef}
-            />
-
-            <Button disabled={gameState === GameState.Active} onClick={start}>
-              Play
-            </Button>
-          </Column>
-        </Row>
-      </Container>
+      <Game
+        title="Hide & Seek With Tommy"
+        message={`Streak: ${streak} ${gameText && ` - ${gameText}`}`}
+        pixiRef={pixiRef}
+        start={start}
+        gameState={gameState}
+      />
     </>
   );
 }

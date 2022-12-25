@@ -1,13 +1,14 @@
-$paddy-yellow: rgb(252, 234, 168);
+$paddy-yellow: #feffe9;
 $paddy-deep-yellow: rgb(249, 219, 139);
 $paddy-brown: rgb(64, 34, 9);
 $paddy-tan: rgb(252, 241, 225);
+$paddy-red: #b8421c;
 
 body {
   margin: 0;
-  color: $paddy-brown;
+  color: $paddy-red;
   background-color: $paddy-yellow;
-  font-family: canada-type-gibson, sans-serif;
+  font-family: "Times Dot", "Times New Roman", Times, serif;
   font-weight: 300;
 }
 
@@ -16,8 +17,6 @@ h2,
 h3,
 h4 {
   margin: 0;
-  font-family: orpheuspro, serif;
-  font-weight: 700;
 }
 
 p {
@@ -25,8 +24,6 @@ p {
 }
 
 a {
-  color: $paddy-brown;
-
   &:hover {
     opacity: 0.56;
   }

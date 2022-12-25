@@ -88,7 +88,8 @@ export default class Jump extends Game {
 
     this.updateSpeed();
     this.maybeAddObstacle();
-    this.checkCollisions();
+    if (this.checkCollisions()) return;
+
     this.checkBounds();
 
     const newScore = Math.floor(this.ticks / 10);
@@ -153,7 +154,10 @@ export default class Jump extends Game {
       this.updateState({
         gameState: GameState.Over,
       });
+      return true;
     }
+
+    return false;
   }
 
   updateSpeed() {

@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-import { Row, Column } from "../../layout/bootstrap";
+import { Column } from "../../layout/bootstrap";
 import { Color, responsive } from "../../utils/style";
 
 const ContentWrapper = styled.div`
@@ -22,6 +22,8 @@ const Body = styled.div`
   }
 
   p {
+    font-size: 18px;
+    line-height: 21px;
     margin-bottom: 16px;
   }
 `;
@@ -59,29 +61,27 @@ const ImageDescription = styled.p`
 export default function Block({ className, content }) {
   const { body, image, align } = content;
   return (
-    <Row>
-      <Column className={className}>
-        <ContentWrapper>
-          {image && (
-            <ImageWrapper align={align}>
-              <GatsbyImage
-                image={getImage(image)}
-                alt=""
-                style={{ width: "100%" }}
-                imgStyle={{ objectFit: "contain" }}
-              />
-              {!!image.description && (
-                <ImageDescription>{image.description}</ImageDescription>
-              )}
-            </ImageWrapper>
-          )}
-          <Body
-            dangerouslySetInnerHTML={{
-              __html: body.childMarkdownRemark.html,
-            }}
-          ></Body>
-        </ContentWrapper>
-      </Column>
-    </Row>
+    <Column className={className}>
+      <ContentWrapper>
+        {image && (
+          <ImageWrapper align={align}>
+            <GatsbyImage
+              image={getImage(image)}
+              alt=""
+              style={{ width: "100%" }}
+              imgStyle={{ objectFit: "contain" }}
+            />
+            {!!image.description && (
+              <ImageDescription>{image.description}</ImageDescription>
+            )}
+          </ImageWrapper>
+        )}
+        <Body
+          dangerouslySetInnerHTML={{
+            __html: body.childMarkdownRemark.html,
+          }}
+        ></Body>
+      </ContentWrapper>
+    </Column>
   );
 }

@@ -1,23 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const ContainerElement = styled.div.attrs({
+export const Container = styled.div.attrs({
   className: "container",
 })`
   box-sizing: border-box;
 `;
 
-export class Container extends React.Component {
-  render() {
-    return <ContainerElement>{this.props.children}</ContainerElement>;
-  }
-}
-
-export class Row extends React.Component {
-  render() {
-    return <div className="row">{this.props.children}</div>;
-  }
-}
+export const Row = styled.div.attrs({
+  className: "row",
+})``;
 
 const ColumnElement = styled.div`
   display: flex;

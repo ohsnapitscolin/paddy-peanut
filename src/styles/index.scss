@@ -1,2 +1,7 @@
 @import "./bootstrap/index";
 @import "./layout/index";
+
+@font-face {
+  font-family: "Times Dot";
+  src: url("../fonts/TimesDotRom.otf") format("opentype");
+}

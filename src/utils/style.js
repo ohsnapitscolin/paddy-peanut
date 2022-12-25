@@ -7,10 +7,11 @@ export const breakpoints = {
 };
 
 export const Color = {
-  paddyYellow: "rgb(252, 234, 168)",
-  paddyDeepYellow: "rgb(249, 219, 139)",
+  paddyYellow: "#feffe9",
+  paddyDeepYellow: "#f9db8b",
   paddyBrown: "rgb(64, 34, 9)",
   paddyTan: "rgb(252, 241, 225)",
+  paddyRed: "#b8421c",
 };
 
 export const responsive = {

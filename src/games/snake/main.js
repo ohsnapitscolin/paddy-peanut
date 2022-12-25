@@ -23,11 +23,18 @@ export default class Snake extends Game {
     this.app.ticker.add(this.tick.bind(this));
   }
 
+  start() {
+    this.gameState = GameState.Active;
+    this.updateState({
+      score: this.score,
+      gameState: this.gameState,
+    });
+  }
+
   reset() {
     this.score = 0;
     this.ticks = 0;
     this.direction = Direction.None;
-    this.gameState = GameState.Active;
 
     this.snake = [];
     this.food = [];
@@ -37,11 +44,6 @@ export default class Snake extends Game {
 
     [x, y] = this.randomSpace();
     this.food.push([x, y]);
-
-    this.updateState({
-      score: this.score,
-      gameState: this.gameState,
-    });
 
     this.draw();
   }

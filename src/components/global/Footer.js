@@ -6,13 +6,17 @@ import { Container, Row, Column } from "../../layout/bootstrap";
 
 const FooterElement = styled.footer`
   width: 100%;
-  height: 128px;
+  height: 60px;
 
-  background-color: ${Color.paddyDeepYellow};
-  border-top: solid 1px black;
+  color: ${Color.paddyYellow};
+  background-color: ${Color.paddyRed};
 
   display: flex;
   align-items: center;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
 `;
 
 export default class Footer extends React.Component {
@@ -21,9 +25,8 @@ export default class Footer extends React.Component {
       <FooterElement>
         <Container>
           <Row>
-            <Column className="col-12">
-              <p>Copyright 2021, Patricia Fumerton</p>
-              <p>All rights reserved</p>
+            <Column className="col-12" center={true}>
+              <p>Copyright 2022, Patricia Fumerton</p>
             </Column>
           </Row>
         </Container>

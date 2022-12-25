@@ -5,8 +5,8 @@ import { Color } from "../../utils/style";
 
 const ButtonElement = styled.button`
   color: ${Color.paddyTan};
-  background-color: ${Color.paddyBrown};
-  border: 2px solid ${Color.paddyBrown};
+  background-color: ${Color.paddyRed};
+  border: 2px solid ${Color.paddyRed};
 
   font-weight: 500;
   padding: 12px 40px;
