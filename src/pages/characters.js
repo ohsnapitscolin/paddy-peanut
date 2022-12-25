@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { graphql } from "gatsby";
 import { Container, Row, Column } from "../layout/bootstrap";
-import Character from "../components/character";
+import Character from "../components/Character";
+import Seo from "../components/global/Seo";
 
 const CharacterGrid = styled.div`
   display: grid;
@@ -13,19 +14,22 @@ const CharacterGrid = styled.div`
 
 export default function Reivews({ data }) {
   return (
-    <Container>
-      <Row>
-        <Column className="col-12 mb-5">
-          <CharacterGrid>
-            {data.allContentfulCharacterPage.nodes[0].characters.map(
-              character => (
-                <Character {...character} />
-              )
-            )}
-          </CharacterGrid>
-        </Column>
-      </Row>
-    </Container>
+    <>
+      <Seo title="Characters" />
+      <Container>
+        <Row>
+          <Column className="col-12 mb-5">
+            <CharacterGrid>
+              {data.allContentfulCharacterPage.nodes[0].characters.map(
+                character => (
+                  <Character {...character} />
+                )
+              )}
+            </CharacterGrid>
+          </Column>
+        </Row>
+      </Container>
+    </>
   );
 }
 
